@@ -1,0 +1,168 @@
+<div>
+  <tabset>
+    <tab heading="Add One Product" customClass="">
+      <div class="col-12 flex-fill container addProd pt-4 m-lg-auto m-0">
+        <form [formGroup]="AddProductForm">
+
+          <div class="row mb-4">
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <!-- <label for="first">English Name</label> -->
+                <input type="text" class="form-control" placeholder="Enter Product Title In English"
+                  formControlName="EnName" [class.is-invalid]="EnName?.errors?.['required'] && !EnName?.untouched"
+                  [class.is-valid]="EnName?.valid">
+              </div>
+            </div>
+            <!--  col-md-6   -->
+
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <!-- <label for="last">Arabic Name</label> -->
+                <input type="text" class="form-control" placeholder="Enter Product Title In Arabic"
+                  formControlName="ArName" [class.is-invalid]="ArName?.errors?.['required'] && !ArName?.untouched"
+                  [class.is-valid]="ArName?.valid">
+              </div>
+            </div>
+            <!--  col-md-6   -->
+          </div>
+
+
+          <div class="row mb-4">
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <!-- <label for="company">Price</label> -->
+                <input type="number" class="form-control" placeholder="Enter Product Price" formControlName="Price"
+                  [class.is-invalid]="Price?.errors?.['required'] && !Price?.untouched" [class.is-valid]="Price?.valid">
+              </div>
+
+
+            </div>
+            <!--  col-md-6   -->
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <!-- <label for="phone">Amount</label> -->
+                <input type="number" class="form-control" id="phone" placeholder="Enter Product Quentity"
+                  formControlName="Amount" [class.is-invalid]="Amount?.errors?.['required'] && !Amount?.untouched"
+                  [class.is-valid]="Amount?.valid">
+              </div>
+            </div>
+            <!--  col-md-6   -->
+          </div>
+          <!--  row   -->
+          <div class="row mb-4">
+
+            <!--  col-md-6   -->
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label for="phone">Please Select Category</label>
+                <select class="form-select" aria-label="Default select example2" formControlName="CategorieID"
+                  (change)="SelectSubCat($event)">
+                  <option *ngFor="let item of listOfCat" [value]="item._id">{{item.CatEnName}}</option>
+                </select>
+              </div>
+            </div>
+            <!--  col-md-6   -->
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label for="phone">Please Select SubCategory</label>
+                <select class="form-select " aria-label="Default select example" formControlName="SubCategID">
+                  <option *ngFor="let item of listOfSubcat" [value]="item._id">{{item.SubCat.EnsubCatName}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row mb-4">
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <input type="file" class="form-control" placeholder="Upload Your Image" accept=".jpg,.png,.jpeg" (change)="OnUpload($event)">
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="d-flex align-items-end justify-content-end">
+            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="submit"
+              class="btn  addprodbtn m-3 btn-lg">Add Product</button>
+          </div>
+        </form>
+      </div>
+    </tab>
+    <tab heading="Add Products Exell">
+      <div class="col m-auto p-5 exellFile mb-5">
+          <label for="formFile">choose your exell file</label>
+          <input class="form-control w-75 my-2" type="file" 
+            accept=".xlsx" (change)="readExcel($event)">
+          <button type="button" class="btn  addprodbtn px-5 my-5 btn-lg" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop2">Add Collection</button>
+      </div>
+    </tab>
+
+  </tabset>
+</div>
+
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close  ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <h1 class="modal-title fs-5 " id="staticBackdropLabel">Adding New Product</h1>
+      </div>
+      <div class="modal-body text-center">
+        Are You Sure You Want To Add Product To Your Data
+        <p class="text-primary text-start fw-bold me-4 mt-2"> English Name : {{AddProductForm.value.EnName}}</p>
+        <p class="text-primary text-start fw-bold me-4 mt-2"> Arabic Name : {{AddProductForm.value.ArName}}</p>
+        <p class="text-primary text-start fw-bold me-4 mt-2"> Price : {{AddProductForm.value.Price}}</p>
+        <p class="text-primary text-start fw-bold me-4 mt-2"> Amount : {{AddProductForm.value.Amount}}</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger me-auto w-25" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary w-25" (click)="AddProduct()"
+          data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close  ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <h1 class="modal-title fs-5 " id="staticBackdropLabel">Adding Collection of Product</h1>
+      </div>
+      <div class="modal-body fs-6">
+        Do You Want To Insert This Collection Of Product To Your Data
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger me-auto w-25" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary w-25" (click)="AddProductExcel()"
+          data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,270 @@
+<section class="">
+    <div class="py-2">
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <div class="col-md-6 col-xl-4">
+
+                    <div class="chart-container d-flex col-12 shadow">
+                        <canvas id="MyChart10">{{ chart }}</canvas>
+                    </div>
+
+                    <div class="chart-container d-flex col-12 shadow mt-4 py-2">
+                        <canvas id="MyChart5">{{ chart }}</canvas>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-8 mt-md-0 mt-3">
+
+                    <div class="card-list">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-4">
+                                    <div id="cardtetx">Number Of OverAll Products </div>
+                                    <div class="d-flex justify-content-strat align-items-center">
+                                        <i class="bi bi-columns-gap fs-1 text-primary"></i>
+
+                                        <span class="ms-2 fs-4">{{listOfProducts.length}}</span>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-4">
+                                    <div id="cardtetx">Number Of OverAll Orders </div>
+                                    <div class="d-flex justify-content-strat align-items-center">
+                                        <i class="bi bi-clipboard-data fs-1 text-warning"></i>
+                                        <span class="ms-2 fs-4">{{listOfOrders.length}}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-4">
+                                    <div id="cardtetx">Number Of OverAll Categories </div>
+                                    <div class="d-flex justify-content-strat align-items-center">
+                                        <i class="bi bi-filter-square fs-1 text-success"></i>
+
+                                        <span class="ms-2 fs-4">{{listOfCat.length}}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="card-list">
+                        <div class="row">
+
+
+
+                            <div class="d-flex justify-content-center">
+                                <div class="col-12 col-lg-8  mb-4">
+                                    <div class="card py-2 py-4">
+                                        <div class="d-flex">
+                                            <div class="col-12 col-lg-7 p-2 text-center">
+                                                <div id="cardtetx">Most Users Login Into Website</div>
+                                                <div class="d-flex justify-content-around align-items-center pt-2">
+                                                    <div *ngFor="let item of UserInfo?.MostLogin">
+                                                        <i class="bi bi-person-square text-success fs-2"></i>
+                                                        <p id="imgtetx" class="m-0">{{item.FirstName}}</p>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-12 col-lg-5 p-2">
+                                                <div id="cardtetx">Most Logined Into Website</div>
+                                                <div class="d-flex justify-content-strat align-items-center">
+                                                    <i class="bi bi-person-circle fs-1 text-primary"></i>
+                                                    <span class="ms-2 fs-4">{{UserInfo?.MostLogin[0].FirstName}} <span
+                                                            class="ms-2 text-sucess">{{UserInfo?.MostLogin[0].NumberOFLogin}}</span>
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="card-list">
+                        <div class="row">
+
+
+
+
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-3">
+                                    <div id="cardtetx">Product Added This Month</div>
+                                    <div class="d-flex justify-content-start align-items-center"
+                                        *ngFor="let item of ProductStats; index as i">
+                                        <i [class]="'bi bi-'+(i+1)+'-circle fs-4 text-dark'"></i>
+
+                                        <p class="ms-1 m-0 text-danger" style="font-size: 15px;"><span class="ms-1">
+                                                Month : {{item._id}} as Total : {{item.total}}</span></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-3">
+                                    <div id="cardtetx">Users Added This Month</div>
+                                    <div class="d-flex justify-content-start align-items-center"
+                                        *ngFor="let item of UsersStats; index as i">
+                                        <i [class]="'bi bi-'+(i+1)+'-circle fs-4 text-dark'"></i>
+
+                                        <p class="ms-1 m-0 text-danger" style="font-size: 15px;"><span class="ms-1">
+                                                Month : {{item._id}} as Total : {{item.total}}</span></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-3">
+                                    <div id="cardtetx">Orders Added This Month</div>
+                                    <div class="d-flex justify-content-start align-items-center"
+                                        *ngFor="let item of OrderStats; index as i">
+                                        <i [class]="'bi bi-'+(i+1)+'-circle fs-4 text-dark'"></i>
+
+                                        <p class="ms-1 m-0 text-danger" style="font-size: 15px;"><span class="ms-1">
+                                                Month : {{item._id}} as Total : {{item.total}}</span></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="card-list">
+                        <div class="row">
+
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-4">
+                                    <div id="cardtetx">Number Of OverAll Users </div>
+                                    <div class="d-flex justify-content-strat align-items-center">
+                                        <i class="bi bi-people-fill fs-1 text-success"></i>
+                                        <span class="ms-2 fs-4">{{listOfUsers.length}}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-4">
+                                    <div id="cardtetx">Number Of Offline Users</div>
+                                    <div class="d-flex justify-content-start align-items-center">
+                                        <i class="bi bi-x-circle fs-1 text-danger"></i>
+                                        <span
+                                            class="ms-2 fs-4">{{listOfUsers.length-UserInfo?.ActivePeople.length}}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-4">
+                                    <div id="cardtetx">Number Of Online Users</div>
+                                    <div class="d-flex justify-content-strat align-items-center">
+                                        <i class="bi bi-broadcast fs-1 text-success"></i>
+                                        <span class="ms-2 fs-4">{{UserInfo?.ActivePeople.length}}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="card-list">
+                        <div class="row">
+
+                            <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                <div class="card p-2 py-3">
+                                    <div id="cardtetx">Most Product Added To Fav</div>
+                                    <div class="d-flex justify-content-start align-items-center"
+                                        *ngFor="let item of ProductInfo?.MostFav; index as i">
+                                        <i [class]="'bi bi-'+(i+1)+'-circle fs-4 text-dark'"></i>
+
+                                        <p class="ms-1 m-0 text-danger" style="font-size: 13px;"><span
+                                                class="ms-1">{{item.EnName}}</span></p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 col-xl-4  mb-4">
+                                <div class="card p-2 py-3">
+                                    <div id="cardtetx">Most Product Orderd</div>
+                                    <div class="d-flex justify-content-start align-items-center"
+                                        *ngFor="let item of ProductInfo?.MostOrdered; index as i">
+                                        <i [class]="'bi bi-'+(i+1)+'-circle fs-4 text-dark'"></i>
+
+                                        <p class="ms-1 m-0 text-danger" style="font-size: 13px;"><span
+                                                class="ms-1">{{item.EnName}}</span></p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 col-xl-4  mb-4">
+                                <div class="card p-2 py-3">
+                                    <div id="cardtetx">Most Product Added To Cart</div>
+                                    <div class="d-flex justify-content-start align-items-center"
+                                        *ngFor="let item of ProductInfo?.MostCart; index as i">
+                                        <i [class]="'bi bi-'+(i+1)+'-circle fs-4 text-dark'"></i>
+
+                                        <p class="ms-1 m-0 text-danger" style="font-size: 13px;"><span
+                                                class="ms-1">{{item.EnName}}</span></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-list">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="chart-container d-flex col-12 shadow p-4">
+                                    <canvas id="MyChart0">{{ chart }}</canvas>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<div class="py-5" *ngIf="waiting">
+    <!-- JQUERY and Normalize.css INSTALLED -->
+
+    <div class="overlay">
+        <div class="overlayDoor"></div>
+        <div class="overlayContent">
+            <div class="loader">
+                <div class="inner"></div>
+            </div>
+        </div>
+    </div>
+  </div>

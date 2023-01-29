@@ -1,0 +1,60 @@
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+.h-custom {
+  height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+
+.loginbtn {
+  background-color: black;
+}
+
+////////////////////////////////
+
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  overflow: hidden;
+  border-radius: 10px;
+  min-height: 500px;
+  border: none;
+}
+
+.btn {
+  background-color: rgb(249, 187, 208);
+  border: none;
+
+  &:hover {
+    background-color: rgb(249, 187, 208);
+  }
+}
+
+input[type='email'],
+input[type='password'] {
+  border-radius: 100px;
+  border: none;
+}
+
+input[type='button'] {
+  border-radius: 100px;
+}
+
+

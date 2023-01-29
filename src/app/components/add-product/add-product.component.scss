@@ -1,0 +1,55 @@
+.addProd{
+	background-color:white
+}
+.tabs:active{
+	color:red
+}
+.addprodbtn{
+	background-color:#6F3C2E;
+	color:white
+}
+.table-color{
+    background-color: white;
+    
+}
+.img{
+    width: 80px;
+    height:80px
+}
+.productsTable{
+    background-color: white;
+}
+.exellFile{
+    background-color: white;
+}
+:host {
+    ::ng-deep {
+      tabset {
+        
+        a {
+            color: #000000 !important;
+        .nav-link {
+            background: #ffffff;
+          
+            border: 1px solid #dde6fb;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            text-align: center;
+            color: #000000 !important;
+        }
+            &.active {
+                color:#F6B0AB !important;
+                
+            
+          }
+        }
+      }
+    }
+  }
+
+
+  

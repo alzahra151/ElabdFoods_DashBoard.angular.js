@@ -1,0 +1,238 @@
+<div class="card-list"  *ngIf="Success === false && error === false">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-xl-4 ">
+      <div class="card p-2 py-2">
+        <div id="cardtetx">Number Of OverAll Users </div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-people-fill fs-1 text-success"></i>
+          <span class="ms-2 fs-4">{{listOfUsers.length}}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4">
+      <div class="card p-2 py-2">
+        <div id="cardtetx">Most Active User </div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-fire fs-1 text-warning"></i>
+          <span class="ms-2 fs-4">{{UserInfo?.MostLogin[0].FirstName }}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4 ">
+      <div class="card p-2 py-2">
+        <div id="cardtetx">Number Of Online Users</div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-broadcast-pin fs-1 text-primary"></i>
+          <span class="ms-2 fs-4">{{UserInfo?.ActivePeople?.length}}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="row p-lg-3 pt-1  ">
+    <div class="col-md-12 ">
+      <div class="table-wrap ">
+        <table class="table UsersTable m-auto  table-hover">
+          <thead class="text-white bg-dark">
+            <tr class="fs-sm-6 text-center">
+              <th scope="col">#</th>
+              <th scope="col">Online</th>
+              <th scope="col">Status</th>
+              <th scope="col">FirstName</th>
+              <th scope="col">LastName</th>
+              <th scope="col">Mobile Number</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Details</th>
+              <th scope="col">Activate</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+  
+            <tr *ngFor="let item of listOfUsers; index as i" class="alert text-center" role="alert">
+              <td>{{i+1}}</td>
+              <td><i *ngIf="item.IsActive" class="bi bi-check-circle-fill fs-2 text-success"></i> <i *ngIf="!item.IsActive" class="bi bi-x-circle-fill fs-2 text-danger"></i></td>
+              <td> <i class="bi bi-emoji-smile fs-2 text-success" *ngIf="item.Active"></i>  <i *ngIf="!item.Active" class="bi bi-emoji-smile-upside-down fs-2 text-danger"></i></td>
+              <td> {{item.FirstName}} </td>
+              <td> {{item.LastName}} </td>
+              <td>{{item.MobileNumber}}</td>
+              <td><button (click)="EditItem = item"
+                class="btn btn-outline-success ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i
+                  class="bi bi-pen"></i></button></td>
+            <td><button (click)="SelectedItem =item"
+                class="btn btn-outline-primary ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2  " data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@mdo"><i
+                  class="bi bi-info-circle" ></i></button></td>
+                  <td><button (click)="activateItem = item"
+                    class="btn btn-outline-danger  ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2" data-bs-toggle="modal" data-bs-target="#active" data-bs-whatever="@mdo"><i
+                      class="bi bi-activity"></i></button></td>
+
+            <td><button (click)="DeletedItem = item"
+                class="btn btn-outline-danger  ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo"><i
+                  class="bi bi-trash3"></i></button></td>
+            </tr>
+  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="modal fade" id="active" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+  
+          <h1 class="modal-title fs-5 ms-auto" id="staticBackdropLabel">Diactivate User</h1>
+  
+        </div>
+        <div class="modal-body text-center">
+          Are You Sure You Want To Diactivate this User </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger me-auto" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="Diactivate()" data-bs-dismiss="modal">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+<!-- Delete -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+  
+          <h1 class="modal-title fs-5 ms-auto" id="staticBackdropLabel">Delete User</h1>
+  
+        </div>
+        <div class="modal-body text-center">
+          Are You Sure You Want To delete this User </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger me-auto" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="Delete()" data-bs-dismiss="modal">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- edit -->
+  
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-5 ms-auto" id="staticBackdropLabel">Edit User Details</h1>
+        </div>
+        <div class="modal-body ">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">First Name</label>
+              <input type="text" class="form-control " id="recipient-name" [placeholder]="EditItem.FirstName"  #FirstName>
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Last Name</label>
+              <input type="text" class="form-control " #LastName [placeholder]="EditItem.LastName">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label" >Email</label>
+              <input type="text" class="form-control " #Email [placeholder]="EditItem.Email">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger me-auto" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="Edit(FirstName.value,LastName.value,Email.value)" data-bs-dismiss="modal">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- detals -->
+  
+  
+  
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div  class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+  
+        </div>
+        <div class="modal-body">
+          <div class="card-container box">
+            <div class="card-flip">
+              <!-- Card Front -->
+              <div class="card front border border-0">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAM1BMVEXk5ueutLeqsbTn6eqpr7PJzc/j5ebf4eLZ3N2wtrnBxsjN0NLGysy6v8HT1tissra8wMNxTKO9AAAFDklEQVR4nO2d3XqDIAxAlfivoO//tEOZWzvbVTEpic252W3PF0gAIcsyRVEURVEURVEURVEURVEURVEURVEURVEURVEURflgAFL/AirAqzXO9R7XNBVcy9TbuMHmxjN6lr92cNVVLKEurVfK/zCORVvW8iUBnC02dj+Wpu0z0Y6QlaN5phcwZqjkOkK5HZyPAjkIjSO4fIdfcOwFKkJlX4zPu7Ha1tIcwR3wWxyFhRG6g4Je0YpSPDJCV8a2Sv2zd1O1x/2WMDZCwljH+clRrHfWCLGK8REMiql//2si5+DKWKcWeAGcFMzzNrXC/0TUwQ2s6+LhlcwjTMlYsUIQzPOCb7YBiyHopyLXIEKPEkI/TgeuiidK/R9FniUDOjRDpvm0RhqjMyyXNjDhCfIMYl1gGjIMIuYsnGEYRMRZOMMunaLVwpWRW008v6fYKDIzxCwVAeNSO90BJW6emelYBRF/kHpYGVaoxTDAaxOFsfP9y8hpJ4xd7gOcij7JNGQ1EYFgkPJa1jQEiYZXRaRINKxSDUW9n+FT82lSKadkiru9/4XPqSLWOekGPoY05TAvLm9orm+YWuwHoBHkZKijNBJGmeb61eL6Ff/6q7bLr7yvv3vKGhpDRjvgjGaPz+gUg6YgcvpyAR2FIZ9U6nEEyZRTovmEU32KichpGn7C17XrfyH9gK/c0CMP05HZIM2uf9sEveizKveBy9/6Qt7o89ne33D525cfcIMW6ab+TMEukQbQbu+xu7X3A9bChmWaCeAkG17bpntwXgWxHaMzGPmUaR5dQZiKqRVeUZ3047fi3nAu28h4CHxCsZAgmEH8Y27jJAhm8c+5RQzRQNVGhVFSfxOYIjp/pP7RxzjevYXVGf4eLt+BJ1vCuLuLkrgABgCGXZ2wik5uty+oBvNirI6mkzhAf4Gsb58Hcm67Jzd+KwD10BYPLL3e0MjvKrgAULnOfveF/O4N2Xb9BZom3gJes3F9X5Zze8/6Yt09b4CrqsEjUv8oFBaR2rl+6CZr2xVrp24o/WitBKuGrrpl1+bFkmK2qXTON4VpbdfLa7o7y/WdLxG7lm2Lqh2clOwTegbvc/vj2U78CwhA87Bn8G5Nk3eOb0Nsr9flz3sG78UUtue4kpv1xvjg3TMay62BMlTlP+vrOMnJsRmt/ze0jsfkPPYdAH57hK+34PeOyc8XIXu5xT2HsUkdZz+adwg8HGFfQ3K5jtDvbUiO4Di9/ywHGrL88pDizZ++oTp+an+SMX/ndymUCwmHMdO7yuOx83pUx/eEMU0AvxWndwgidAqOZ8ypCwdEfvvEo6D9HwpA8wzvmOJEqAg9ySu8g4x0Hb9hSB/BANEKJ+LbPBU0lzbAJs4xt1AoshKkUGQmiH8/jJ0gdhTTLmSegHlPE0oOdXALnqDjKYh3px//fSgSWG8UqfrrIICzYYSJXRr9BSPbpNzw7gBjKjKOYI7ReIGqQRIap5+5MdjyvuDkExvGeXSlONWZAP3/AZBwJohU7QJRGU+cTVH18ELmRPNBmibW6MT/k1b0XhdkRBvyT6SB6EYv/GvhSmRNpGngRULsAlxMCGNXp7w3FfdEbTEEDdLI9TdIKRUzUesa3I461ER8cpNT7gMRhpKmYVS9ELOgCUQsa4SsulciKiLbY+AnHD8cpuhISsnxpamI84sbDq9qYJgf8wiiOBrC7Ml7M7ZECCqKoiiKoiiKoiiKoijv5AvJxlZRyNWWLwAAAABJRU5ErkJggg==" class="card-img-top w-100 h-100 img-fluid" alt="movie-poster">
+                  <div class="card-block">
+                    </div>
+              </div>
+              <!-- End Card Front -->
+          
+              <!-- Card Back -->
+              <div class="card back">
+                <div class="card-header warning-color"></div>
+                  <div class="card-block ">
+                    <h4 class="card-title">User Details</h4>
+                    <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">First Name  : </span> {{SelectedItem.FirstName}}</a></p>
+                    <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Last Name : </span> {{SelectedItem.LastName}}</a></p>
+                    <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Email : </span>{{SelectedItem.Email}}</a></p>
+                    <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Gender : </span>  {{SelectedItem.Gender}}</a></p>
+                    <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Number Of Carts Elements : </span> {{SelectedItem.NumberOFCart}}</a></p>
+                    <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Number Of Favs Elements : </span> {{SelectedItem.NumberOFFav}}</a></p>
+                    <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Number Of Logins Items : </span> {{SelectedItem.NumberOFLogin}}</a></p>
+                    <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Mobile Number : </span> {{SelectedItem.MobileNumber}}</a></p>
+                  </div>
+                </div>
+                <!-- End Card Back -->
+            </div>
+          </div>
+                 </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger w-50 mx-auto" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="overlay" *ngIf="waiting">
+    <div class="overlayDoor"></div>
+    <div class="overlayContent">
+        <div class="loader">
+            <div class="inner"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="frame" *ngIf="Success">
+  <div class="errorMsg">
+      <img src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" width="44" height="38" />
+          <span class="title">Done</span>
+          <p>{{text}}</p>
+          <div class="button" (click)="Success=false">إغلاق</div>
+    </div>
+</div>
+
+
+<div class="frame" *ngIf="error">
+  <div class="errorMsg">
+      <img src="https://100dayscss.com/codepen/alert.png" width="44" height="38" />
+          <span class="title">Error</span>
+          <p>There is some Error please try again</p>
+          <div class="button" (click)="error=false">إغلاق</div>
+    </div>
+</div>

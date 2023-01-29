@@ -1,0 +1,236 @@
+<div class="card-list ">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-xl-4 ">
+      <div class="card p-2 py-4">
+        <div id="cardtetx">Number Of OverAll Products </div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-border-style fs-1 text-success"></i>
+          <span class="ms-2 fs-4">{{listOfProducts.length}}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4">
+      <div class="card p-2 py-4">
+        <div id="cardtetx">ِNumber Of All Categorie</div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-inboxes-fill fs-1 text-warning"></i>
+          <span class="ms-2 fs-4">{{listOfCat.length }}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4 ">
+      <div class="card p-2 py-4">
+        <div id="cardtetx">Number Of All SubCategories</div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-cart-check-fill fs-1 text-primary"></i>
+          <span class="ms-2 fs-4">{{listOfSubCat.length}}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-6 col-xl-4 ">
+      <div class="card p-2 py-4">
+        <div id="cardtetx">MOst Product Added To Cart</div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-cart-check fs-1 text-success"></i>
+          <span class="ms-2 fs-6">{{ProductInfo?.MostCart[0].EnName}}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4">
+      <div class="card p-2 py-4">
+        <div id="cardtetx">MOst Product Added To Fav</div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-heart-fill fs-1 text-warning"></i>
+          <span class="ms-2 fs-6">{{ProductInfo?.MostFav[0].EnName }}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4 ">
+      <div class="card p-2 py-4">
+        <div id="cardtetx">MOst Product Added To Ordered</div>
+        <div class="d-flex justify-content-strat align-items-center">
+          <i class="bi bi-list-ol fs-1 text-primary"></i>
+          <span class="ms-2 fs-6">{{ProductInfo?.MostOrdered[0].EnName}}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row p-lg-3 pt-1  ">
+  <div class="col-md-12 ">
+    <div class="table-wrap ">
+      <table class="table productsTable m-auto  table-hover">
+        <thead class="text-white bg-dark">
+          <tr class="fs-sm-6 text-center">
+            <th scope="col">#</th>
+            <th scope="col"> English</th>
+            <th scope="col">Arabic</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Price</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Details</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let product of listOfProducts; index as i" class="alert text-center" role="alert">
+            <td>{{i+1}}</td>
+            <td> {{product.EnName}} </td>
+            <td> {{product.ArName}} </td>
+            <td> {{product.Amount}} </td>
+            <td>{{product.Price}}</td>
+            <td><button (click)="EditItem = product"
+                class="btn btn-outline-success ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i
+                  class="bi bi-pen"></i></button></td>
+            <td><button (click)="SelectedItem =product"
+                class="btn btn-outline-primary ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2  " data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@mdo"><i
+                  class="bi bi-info-circle" ></i></button></td>
+            <td><button (click)="DeletedItem = product"
+                class="btn btn-outline-danger  ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo"><i
+                  class="bi bi-trash3"></i></button></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Delete -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <h1 class="modal-title fs-5 ms-auto" id="staticBackdropLabel">Delete Product</h1>
+
+      </div>
+      <div class="modal-body text-center">
+        Are You Sure You Want To delete this Product </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger me-auto" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="Delete()" data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- edit -->
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5 ms-auto" id="staticBackdropLabel">Edit Product Details</h1>
+      </div>
+      <div class="modal-body text-end">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">English Name</label>
+            <input type="text" class="form-control text-end" id="recipient-name" [placeholder]="EditItem.EnName"  #EnName>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Arabic Name</label>
+            <input type="text" class="form-control text-end" #ArName [placeholder]="EditItem.ArName">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label" >Price</label>
+            <input type="number" class="form-control text-end" #Price [placeholder]="EditItem.Price">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label" >Amount</label>
+            <input type="number" class="form-control text-end" #Amount [placeholder]="EditItem.Amount">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger me-auto" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="Edit(EnName.value,ArName.value,+Price.value,+Amount.value)" data-bs-dismiss="modal">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- detals -->
+
+
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div  class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      </div>
+      <div class="modal-body">
+        <div class="card-container box">
+          <div class="card-flip">
+            <!-- Card Front -->
+            <div class="card front">
+              <img [src]="SelectedItem.Image?.url" class="card-img-top w-100 h-100 img-fluid" alt="movie-poster">
+                <div class="card-block">
+                  </div>
+            </div>
+            <!-- End Card Front -->
+        
+            <!-- Card Back -->
+            <div class="card back">
+              <div class="card-header warning-color"></div>
+                <div class="card-block ">
+                  <h4 class="card-title">Product Details</h4>
+                  <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Name In English  : </span> {{SelectedItem.EnName}}</a></p>
+                  <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Name In Arabic : </span> {{SelectedItem.ArName}}</a></p>
+                  <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Price : </span>{{SelectedItem.Price}}</a></p>
+                  <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Remaining Amount : </span>  {{SelectedItem.Amount}}</a></p>
+                  <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Categorie In English : </span> {{SelectedItem.CategorieID?.CatEnName}}</a></p>
+                  <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">Categorie In Arabic : </span> {{SelectedItem.CategorieID?.CatArName}}</a></p>
+                  <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">SubCategorie In English : </span> {{SelectedItem.SubCategID?.EnsubCatName}}</a></p>
+                  <p class="text-start ms-3"><a href="#" class="rating"><span class="text-white">SubCategorie In Arabic : </span> {{SelectedItem.SubCategID?.ArsubCatName}}</a></p>
+
+
+                </div>
+              </div>
+              <!-- End Card Back -->
+          </div>
+        </div>
+               </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger w-50 mx-auto" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="py-5" *ngIf="waiting">
+  <!-- JQUERY and Normalize.css INSTALLED -->
+
+  <div class="overlay">
+      <div class="overlayDoor"></div>
+      <div class="overlayContent">
+          <div class="loader">
+              <div class="inner"></div>
+          </div>
+      </div>
+  </div>
+</div>

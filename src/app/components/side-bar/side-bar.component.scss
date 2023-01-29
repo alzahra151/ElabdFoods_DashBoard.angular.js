@@ -1,0 +1,22 @@
+#side_nav {
+  height: 100%;
+  width: 260px;
+  position: fixed;
+}
+li{
+  
+  .active{
+    background-color: rgb(252, 180, 169);
+    color: black;
+  }
+  
+}
+
+.nav-link{
+  color: black;
+&:hover{
+  background-color:  rgb(252, 180, 169);
+  color: black;
+  
+}
+}

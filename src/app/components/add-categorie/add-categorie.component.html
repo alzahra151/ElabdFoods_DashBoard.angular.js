@@ -1,0 +1,188 @@
+<div class="container">
+    <form [formGroup]="AddCateForm" class="m-3">
+      <div class="row mb-4">
+        <div class="col-md-6 ">
+          <div class="form-group">
+  
+            <input formControlName="CatEnName" type="text" class="form-control" placeholder="Enter Category In English"
+            >
+          </div>
+        </div>
+        <!--  col-md-6   -->
+  
+        <div class="col-md-6 ">
+          <div class="form-group">
+  
+            <input formControlName="CatArName" type="text" class="form-control" placeholder="Enter Category In Arabic">
+          </div>
+        </div>
+        <!--  col-md-6   -->
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-6 ">
+  
+  
+          <input formControlName="CatEnSize" type="text" class="form-control"
+            placeholder="Enter Size Of Category In English">
+         
+        </div>
+        <!--  col-md-6   -->
+  
+        <div class="col-md-6 ">
+          <div class="form-group">
+  
+            <input formControlName="CatArSize" type="text" class="form-control"
+              placeholder="Enter Size Of Category In Arabic">
+          </div>
+        </div>
+        <!--  col-md-6   -->
+      </div>
+  
+      <div class="row mb-4">
+        <div class="col-md-6">
+  
+          <div formArrayName="SubCategorieID">
+            <div class="mb-3 " *ngFor="let cate of SubCategorieID.controls;let i=index">
+              <label for="subcat{{i+1}}" class="form-label">Sub Category No.{{i+1}}</label>
+              <select class="form-select " aria-label="Default select example" name="subcat{{i+1}}" id="subcat{{i+1}}"
+                [formControlName]="i">
+                <option *ngFor="let cate of listOfSubcat" [value]="cate._id">{{cate.EnsubCatName}}</option>
+              </select>
+              <!-- <button class="btn btn-primary d-block ms-auto" (click)="addSubCate()" *ngIf="cate.value && i==SubCategorieID.controls.length-1">+</button> -->
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+      <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="submit"
+      class="btn  addprodbtn m-3 btn-lg">Add Category</button>
+    </form>
+   
+    <!-- ////////// -->
+    <div class="row p-lg-3 pt-1  ">
+      <div class="col-md-12 ">
+        <div class="table-wrap ">
+          <table class="table productsTable m-auto  table-hover">
+            <thead class="text-white bg-dark">
+              <tr class="fs-sm-6 text-center">
+                <th scope="col">#</th>
+                <th scope="col"> English</th>
+                <th scope="col">Arabic</th>
+  
+                <th scope="col">Edit</th>
+  
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+  
+              <tr *ngFor="let category of listOfCategories; index as i" class="alert text-center" role="alert">
+                <td>{{i+1}}</td>
+                <td>{{category.CatEnName}} </td>
+                <td> {{category.CatArName}} </td>
+  
+                <td><button (click)="editecate=category"
+                    class="btn btn-outline-success ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i
+                      class="bi bi-pen"></i></button></td>
+  
+                <td><button (click)="deletedCate=category"
+                    class="btn btn-outline-danger  ps-sm-1  pe-sm-1 ps-lg-3 pe-lg-3 pe-md-2 ps-md-2"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo"><i
+                      class="bi bi-trash3"></i></button></td>
+              </tr>
+  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Delete -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+  
+          <h1 class="modal-title fs-5 ms-auto" id="staticBackdropLabel">Delete Product</h1>
+  
+        </div>
+        <div class="modal-body text-center">
+          Are You Sure You Want To delete this Product </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger me-auto" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="DeleteCate()" data-bs-dismiss="modal">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- edit -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close me-auto ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-5 ms-auto" id="staticBackdropLabel">Edit Product Details</h1>
+        </div>
+        <div class="modal-body text-end">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">English Name</label>
+              <input type="text" class="form-control text-end" id="recipient-name" [value]="editecate.CatArName"
+                #CatArName>
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Arabic Name</label>
+              <input type="text" class="form-control text-end" #CatEnName [value]="editecate.CatEnName">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Arabic Size </label>
+              <input type="text" class="form-control text-end" #CatArSize [value]="editecate.CatArSize">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">English Size</label>
+              <input type="text" class="form-control text-end" #CatEnSize [value]="editecate.CatEnSize">
+            </div>
+  
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger me-auto" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"
+            (click)="Edite(CatArName.value,CatEnName.value ,CatArSize.value ,CatEnSize.value )"
+            data-bs-dismiss="modal">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- add -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close  ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+  
+          <h1 class="modal-title fs-5 " id="staticBackdropLabel">Adding New Product</h1>
+        </div>
+        <div class="modal-body text-center">
+          Are You Sure You Want To Add Product To Your Data
+          <p class="text-primary text-start fw-bold me-4 mt-2"> En Name : {{AddCateForm.value.CatArName}}</p>
+          <p class="text-primary text-start fw-bold me-4 mt-2"> Ar Name : {{AddCateForm.value.CatEnName}}</p>
+          <p class="text-primary text-start fw-bold me-4 mt-2"> En size : {{AddCateForm.value.CatArSize}}</p>
+          <p class="text-primary text-start fw-bold me-4 mt-2"> Ar size : {{AddCateForm.value.CatEnSize}}</p>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger me-auto w-25" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary w-25" (click)="AddCategory()"
+            data-bs-dismiss="modal">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>

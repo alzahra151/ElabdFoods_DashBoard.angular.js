@@ -1,0 +1,121 @@
+<div >
+
+    <div class="container addProd pt-2">
+        <form [formGroup]="AddUserForm">
+
+            <div class="row mb-4">
+                <div class="col-md-6 ">
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" placeholder="Enter FirstName" formControlName="FirstName"
+                        [class.is-invalid]="FirstName?.errors?.['required'] && !FirstName?.untouched"
+                                        [class.is-valid]="FirstName?.valid">
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 ">
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" placeholder="Enter LastName "
+                            formControlName="LastName"   [class.is-invalid]="LastName?.errors?.['required'] && !LastName?.untouched"
+                            [class.is-valid]="LastName?.valid">
+                    </div>
+                </div>
+                <!--  col-md-6   -->
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-6 ">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Enter Email" formControlName="Email"
+                        [class.is-invalid]="Email?.errors?.['required'] && !Email?.untouched"
+                        [class.is-valid]="Email?.valid">
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Mobile Number"
+                            formControlName="MobileNumber" [class.is-invalid]="MobileNumber?.errors?.['required'] && !MobileNumber?.untouched"
+                            [class.is-valid]="MobileNumber?.valid">
+                    </div>
+                </div>
+                <!--  col-md-6   -->
+            </div>
+            <!--  row   -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- <label for="company">Arabic Category</label> -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="Gender" value="male" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                male
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="Gender" value="female">
+                            <label class="form-check-label" for="exampleRadios2">
+                                female
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="IsAdmin" value="true" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Admin
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" formControlName="IsAdmin" value="false">
+                            <label class="form-check-label" for="exampleRadios2">
+                                User
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <input type="password" class="form-control " formControlName="Password" placeholder="Enter Password" 
+                        [class.is-invalid]="Password?.errors?.['required'] && !Password?.untouched"
+                                        [class.is-valid]="Password?.valid">
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <input type="password" class="form-control " formControlName="rePassword" placeholder="Confirme Password"
+                        [class.is-invalid]="rePassword?.errors?.['required'] && !rePassword?.untouched"
+                        [class.is-valid]="rePassword?.valid && matched()">
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mb-4">
+
+                <div class="col-md-6">
+                </div>
+
+            </div>
+
+            <div class="d-flex align-items-end justify-content-end">
+                <button type="submit" class="btn  addprodbtn m-3 btn-lg" [disabled]="AddUserForm.invalid" (click)="AddUser()">Add User</button>
+            </div>
+
+        </form>
+    </div>
+</div>
