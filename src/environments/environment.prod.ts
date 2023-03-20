@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl:"http://localhost:3000/api/elabdfoods/",
+  apiUrl:"https://elabdapi-eg.onrender.com/api/elabdfoods/",
 
 };
